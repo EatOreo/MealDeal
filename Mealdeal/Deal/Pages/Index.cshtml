@@ -1,0 +1,28 @@
+@page
+@using Deal
+@model Deal.Pages.Index
+@inject DealService dealService
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+@foreach(var deal in (await dealService.GetOfferFromBusinessName("netto")).Offers)
+{
+    <div>
+        <h3>@deal.Name</h3>
+        <p>@deal.Price kr</p>
+        <img src="@deal.Images[3].Url"/>
+    </div>
+}
+
+</body>
+</html>
