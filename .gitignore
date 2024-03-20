@@ -612,3 +612,7 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 # End of https://www.toptal.com/developers/gitignore/api/dotnetcore,aspnetcore,csharp,rider
+
+deal.db
+deal.db-shm
+deal.db-wal
