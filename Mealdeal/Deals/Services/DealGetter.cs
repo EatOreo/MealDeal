@@ -1,5 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-
 namespace Deals;
 
 public class DealGetter : IHostedService
@@ -15,27 +13,10 @@ public class DealGetter : IHostedService
     {
         _timer = new Timer(async _ =>
         {
-            using (var scope = _services.CreateScope())
-            {
-                var dealContext = scope.ServiceProvider.GetRequiredService<DealContext>();
-                var dealService = scope.ServiceProvider.GetRequiredService<DealService>();
-                if (dealContext.Deals.Count() != 0) return; //TODO: Remove this line for production
+            using var scope = _services.CreateScope();
+            var dealService = scope.ServiceProvider.GetRequiredService<DealService>();
                 
-                var stores = await dealContext.Stores.Include(store => store.Deals).ToListAsync();
-                foreach (var store in stores)
-                {
-                    var offers = await dealService.GetOffersFromBusinessName(store.Name);
-                    var existingDeals = store.Deals.Select(d => d.Id).ToHashSet();
-                    var deals = offers.Select(o => new Deal
-                    {
-                        Id = o.Id,
-                        Name = o.Name,
-                        Price = o.Price
-                    }).Where(o => !existingDeals.Contains(o.Id)).ToHashSet();
-                    store.Deals.UnionWith(deals);
-                }
-                await dealContext.SaveChangesAsync();
-            }
+            await dealService.UpdateDeals();
         }, null, TimeSpan.Zero, TimeSpan.FromHours(24));
         
         return Task.CompletedTask;

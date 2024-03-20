@@ -15,12 +15,12 @@
 </head>
 <body>
 
-@foreach(var deal in await dealService.GetOffersFromBusinessName("netto", 5))
+@foreach(var deal in await dealService.GetDealsFromStore("netto", 5))
 {
     <div>
         <h3>@deal.Name</h3>
         <p>@deal.Price kr</p>
-        <img src="@deal.Images[3].Url"/>
+        @* <img src="@deal.Images[3].Url"/> *@
     </div>
 }
 
