@@ -19,7 +19,7 @@ app.MapGet("/business/{businessName}", async (DealService dealService, [FromRout
 
 app.MapGet("/deals/{businessName}", async (DealService dealService, [FromRoute] string businessName) =>
 {
-    return (await dealService.GetOfferFromBusinessName(businessName)).Select(o => new { o.Name, o.Price });
+    return (await dealService.GetOffersFromBusinessName(businessName)).Select(o => new { o.Name, o.Price });
 });
 
 app.MapRazorPages();
