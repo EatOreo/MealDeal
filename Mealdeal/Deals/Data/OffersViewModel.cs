@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Deal;
+namespace Deals;
 
 public class PageInfo
 {

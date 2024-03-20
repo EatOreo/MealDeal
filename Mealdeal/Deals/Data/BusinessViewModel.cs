@@ -1,4 +1,4 @@
-namespace Deal;
+namespace Deals;
 
 using Newtonsoft.Json;
 using System.Collections.Generic;

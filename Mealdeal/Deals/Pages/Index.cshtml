@@ -1,6 +1,6 @@
 @page
-@using Deal
-@model Deal.Pages.Index
+@using Deals
+@model Deals.Pages.Index
 @inject DealService dealService
 
 @{
@@ -15,7 +15,7 @@
 </head>
 <body>
 
-@foreach(var deal in (await dealService.GetOfferFromBusinessName("netto")).Offers)
+@foreach(var deal in (await dealService.GetOfferFromBusinessName("netto")).Take(5))
 {
     <div>
         <h3>@deal.Name</h3>
