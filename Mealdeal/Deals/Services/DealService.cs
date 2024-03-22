@@ -28,8 +28,8 @@ public class DealService
                         Name = o.Name,
                         Price = o.Price
                     })
-                .ToHashSet();
-            store.Deals.UnionWith(deals);
+                .ToList();
+            store.Deals.AddRange(deals);
         }
         await _dealContext.SaveChangesAsync();
     }
