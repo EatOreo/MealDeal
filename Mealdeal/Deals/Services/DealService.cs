@@ -26,7 +26,7 @@ public class DealService
                     new Deal {
                         Id = o.Id,
                         Name = o.Name,
-                        Price = o.Price,
+                        Price = (float) o.Price,
                         SmallImage = o.Images[3].Url,
                         BigImage = o.Images[1].Url,
                         ShopLink = o.WebshopLink,
@@ -44,12 +44,16 @@ public class DealService
     public async Task<List<Deal>> GetDealsFromShop(string shopName, int limit = -1)
     {
         var shop = await _dealContext.Stores
-            .Include(shop => shop.Deals)
             .FirstOrDefaultAsync(shop => shop.Name == shopName);
         if (shop == null) return new List<Deal>();
-        else if (limit >= 0 ) return shop.Deals.Take(limit).ToList();
-        else return shop.Deals.ToList();
+
+        var deals = _dealContext.Deals
+            .Where(d => d.Shop == shop);
+        
+        if (limit >= 0 ) return await deals.Take(limit).ToListAsync();
+        else return await deals.ToListAsync();
     }
+    
     
     private async Task<BusinessViewModel> GetBusiness(string businessName)
     {

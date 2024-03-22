@@ -15,12 +15,13 @@
 </head>
 <body>
 
-@foreach(var deal in await dealService.GetDealsFromShop("netto", 5))
+@foreach(var deal in await dealService.GetDealsFromShop("netto", 10))
 {
     <div>
         <h3>@deal.Name</h3>
         <p>@deal.Price kr</p>
-        @* <img src="@deal.Images[3].Url"/> *@
+        <p> @(Math.Abs(deal.UnitsFrom - deal.UnitsTo) < 0.1 ? $"{deal.UnitsFrom}" : $"{deal.UnitsFrom} - {deal.UnitsTo}") @deal.UnitType</p>
+        <img src="@deal.SmallImage"/>
     </div>
 }
 
