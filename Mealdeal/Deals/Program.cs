@@ -13,8 +13,8 @@ else
     var context = scope.ServiceProvider.GetRequiredService<DealContext>();
     if (context.Database.EnsureCreated()) context.Database.Migrate();
     if (!context.Stores.Any()) context.Stores.AddRange(
-        new Store { Id = "9ba51", Name = "netto" },
-        new Store { Id = "DWZE1w", Name = "365discount" }
+        new Shop { Id = "9ba51", Name = "netto" },
+        new Shop { Id = "DWZE1w", Name = "365discount" }
     );
     context.SaveChanges();
     if (!context.Deals.Any()) scope.ServiceProvider.GetRequiredService<DealService>().UpdateDeals().Wait();

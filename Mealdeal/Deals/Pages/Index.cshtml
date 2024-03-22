@@ -15,7 +15,7 @@
 </head>
 <body>
 
-@foreach(var deal in await dealService.GetDealsFromStore("netto", 5))
+@foreach(var deal in await dealService.GetDealsFromShop("netto", 5))
 {
     <div>
         <h3>@deal.Name</h3>

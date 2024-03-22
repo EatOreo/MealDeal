@@ -1,6 +1,6 @@
 namespace Deals;
 
-public class Store
+public class Shop
 {
     public string Id { get; set; }
     public string Name { get; set; }

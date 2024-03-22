@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Deal.Migrations
 {
     [DbContext(typeof(DealContext))]
-    [Migration("20240322160214_InitialCreate")]
+    [Migration("20240322170123_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,6 +24,14 @@ namespace Deal.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("BigImage")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -31,18 +39,36 @@ namespace Deal.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("StoreId")
+                    b.Property<string>("ShopId")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("ShopLink")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SmallImage")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UnitType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<float>("UnitsFrom")
+                        .HasColumnType("REAL");
+
+                    b.Property<float>("UnitsTo")
+                        .HasColumnType("REAL");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("StoreId");
+                    b.HasIndex("ShopId");
 
                     b.ToTable("Deals");
                 });
 
-            modelBuilder.Entity("Deals.Store", b =>
+            modelBuilder.Entity("Deals.Shop", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
@@ -58,16 +84,16 @@ namespace Deal.Migrations
 
             modelBuilder.Entity("Deals.Deal", b =>
                 {
-                    b.HasOne("Deals.Store", "Store")
+                    b.HasOne("Deals.Shop", "Shop")
                         .WithMany("Deals")
-                        .HasForeignKey("StoreId")
+                        .HasForeignKey("ShopId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Store");
+                    b.Navigation("Shop");
                 });
 
-            modelBuilder.Entity("Deals.Store", b =>
+            modelBuilder.Entity("Deals.Shop", b =>
                 {
                     b.Navigation("Deals");
                 });

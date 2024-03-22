@@ -15,33 +15,40 @@ public class DealService
     
     public async Task UpdateDeals()
     {
-        var stores = await _dealContext.Stores.Include(store => store.Deals).ToListAsync();
-        foreach (var store in stores)
+        var shops = await _dealContext.Stores.Include(shop => shop.Deals).ToListAsync();
+        foreach (var shop in shops)
         {
-            var offers = await GetOffersFromBusinessName(store.Name);
-            var existingDeals = store.Deals.Select(d => d.Id).ToHashSet();
+            var offers = await GetOffersFromBusinessName(shop.Name);
+            var existingDeals = shop.Deals.Select(d => d.Id).ToHashSet();
             var deals = offers
                 .Where(o => !existingDeals.Contains(o.Id))
                 .Select(o => 
                     new Deal {
                         Id = o.Id,
                         Name = o.Name,
-                        Price = o.Price
+                        Price = o.Price,
+                        SmallImage = o.Images[3].Url,
+                        BigImage = o.Images[1].Url,
+                        ShopLink = o.WebshopLink,
+                        Description = o.Description,
+                        UnitType = o.UnitSymbol,
+                        UnitsFrom = o.UnitSize.From,
+                        UnitsTo = o.UnitSize.To
                     })
                 .ToList();
-            store.Deals.AddRange(deals);
+            shop.Deals.AddRange(deals);
         }
         await _dealContext.SaveChangesAsync();
     }
     
-    public async Task<List<Deal>> GetDealsFromStore(string storeName, int limit = -1)
+    public async Task<List<Deal>> GetDealsFromShop(string shopName, int limit = -1)
     {
-        var store = await _dealContext.Stores
-            .Include(store => store.Deals)
-            .FirstOrDefaultAsync(store => store.Name == storeName);
-        if (store == null) return new List<Deal>();
-        else if (limit >= 0 ) return store.Deals.Take(limit).ToList();
-        else return store.Deals.ToList();
+        var shop = await _dealContext.Stores
+            .Include(shop => shop.Deals)
+            .FirstOrDefaultAsync(shop => shop.Name == shopName);
+        if (shop == null) return new List<Deal>();
+        else if (limit >= 0 ) return shop.Deals.Take(limit).ToList();
+        else return shop.Deals.ToList();
     }
     
     private async Task<BusinessViewModel> GetBusiness(string businessName)

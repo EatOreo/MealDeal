@@ -4,7 +4,7 @@ namespace Deals;
 
 public class DealContext : DbContext
 {
-    public DbSet<Store> Stores { get; set; }
+    public DbSet<Shop> Stores { get; set; }
     public DbSet<Deal> Deals { get; set; }
 
     public DealContext(DbContextOptions options) : base(options)
@@ -14,8 +14,8 @@ public class DealContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Store>()
+        modelBuilder.Entity<Shop>()
             .HasMany(s => s.Deals)
-            .WithOne(d => d.Store);
+            .WithOne(d => d.Shop);
     }
 }
