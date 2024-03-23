@@ -4,8 +4,9 @@ namespace Deals.Pages;
 
 public class Index : PageModel
 {
-    public void OnGet()
+    public string? Search { get; set; }
+    public void OnGet(string? search)
     {
-        
+        Search = search;
     }
 }

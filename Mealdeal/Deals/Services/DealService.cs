@@ -41,7 +41,7 @@ public class DealService
         await _dealContext.SaveChangesAsync();
     }
     
-    public async Task<List<Deal>> GetDealsFromShop(string shopName, int limit = -1)
+    public async Task<List<Deal>> GetDealsFromShop(string shopName, string search = "", int limit = -1)
     {
         var shop = await _dealContext.Stores
             .FirstOrDefaultAsync(shop => shop.Name == shopName);
@@ -49,6 +49,7 @@ public class DealService
 
         var deals = _dealContext.Deals
             .Where(d => d.Shop == shop);
+        if (!string.IsNullOrEmpty(search)) deals = deals.Where(d => d.Name.Contains(search));
         
         if (limit >= 0 ) return await deals.Take(limit).ToListAsync();
         else return await deals.ToListAsync();

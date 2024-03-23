@@ -1,4 +1,4 @@
-@page
+@page "/{search?}"
 @using Deals
 @model Deals.Pages.Index
 @inject DealService dealService
@@ -15,7 +15,7 @@
 </head>
 <body>
 
-@foreach(var deal in await dealService.GetDealsFromShop("netto", 10))
+@foreach(var deal in await dealService.GetDealsFromShop("netto", Model.Search, 5))
 {
     <div>
         <h3>@deal.Name</h3>
