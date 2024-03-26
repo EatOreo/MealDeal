@@ -1,7 +1,5 @@
-@page "/{search?}"
-@using Deals
+@page "/"
 @model Deals.Pages.Index
-@inject DealService dealService
 
 @{
     Layout = null;
@@ -11,19 +9,18 @@
 
 <html>
 <head>
-    <title></title>
+    <title>Meal Deal</title>
+    <script src="https://unpkg.com/htmx.org@1.9.11" integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0" crossorigin="anonymous"></script>
 </head>
 <body>
 
-@foreach(var deal in await dealService.GetDealsFromShop("netto", Model.Search, 5))
-{
-    <div>
-        <h3>@deal.Name</h3>
-        <p>@deal.Price kr</p>
-        <p> @(Math.Abs(deal.UnitsFrom - deal.UnitsTo) < 0.1 ? $"{deal.UnitsFrom}" : $"{deal.UnitsFrom} - {deal.UnitsTo}") @deal.UnitType</p>
-        <img src="@deal.SmallImage"/>
-    </div>
-}
+    <input type="text" name="search"
+        hx-get="/api/deals"
+        hx-trigger="keyup changed delay:500ms"
+        hx-target="#search-results"
+        placeholder="Search..."
+    >
+    <div id="search-results"></div>
 
 </body>
 </html>
