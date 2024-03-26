@@ -12,5 +12,7 @@ public class Deal
     public string SmallImage { get; set; }
     public string BigImage { get; set; }
     public string ShopLink { get; set; }
+    public DateTime? ValidFrom { get; set; }
+    public DateTime? ValidTo { get; set; }
     public virtual Shop Shop { get; set; }
 }

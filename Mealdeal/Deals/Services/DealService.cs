@@ -33,7 +33,9 @@ public class DealService
                         Description = o.Description,
                         UnitType = o.UnitSymbol,
                         UnitsFrom = o.UnitSize.From,
-                        UnitsTo = o.UnitSize.To
+                        UnitsTo = o.UnitSize.To,
+                        ValidFrom = o.Validity.From,
+                        ValidTo = o.Validity.To
                     })
                 .ToList();
             shop.Deals.AddRange(deals);
@@ -48,7 +50,7 @@ public class DealService
         if (shop == null) return new List<Deal>();
 
         var deals = _dealContext.Deals
-            .Where(d => d.Shop == shop);
+            .Where(d => d.Shop == shop && d.ValidFrom <= DateTime.Now && d.ValidTo >= DateTime.Now);
         if (!string.IsNullOrEmpty(search)) deals = deals.Where(d => d.Name.ToLower().Contains(search.ToLower()));
         
         if (limit >= 0 ) return await deals.Take(limit).ToListAsync();
