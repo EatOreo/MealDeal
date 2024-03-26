@@ -2,7 +2,8 @@
 @model Deals.Pages.Index
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Meal Deal | Search Deals";
+    Layout = "Shared/_Layout";;
 }
 
 <!DOCTYPE html>
@@ -10,17 +11,21 @@
 <html>
 <head>
     <title>Meal Deal</title>
-    <script src="https://unpkg.com/htmx.org@1.9.11" integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0" crossorigin="anonymous"></script>
 </head>
 <body>
+<div style="display: flex; flex-direction: column; align-items: center; height: 100vh; position: relative;">
 
     <input type="text" name="search"
         hx-get="/api/deals"
         hx-trigger="keyup changed delay:500ms"
         hx-target="#search-results"
-        placeholder="Search..."
+        placeholder="Search Deals..."
+        style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -150%); width: 300px; height: 50px; font-size: 20px;"
     >
-    <div id="search-results"></div>
+    <div id="search-results"
+         style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, 0%);"
+    ></div>
 
+</div>
 </body>
 </html>
