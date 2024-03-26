@@ -9,10 +9,10 @@
 
 @foreach(var deal in await dealService.GetDealsFromShop("netto", Model.Search?? "", 5))
 {
-    <div>
-        <h3>@deal.Name</h3>
-        <p>@deal.Price kr</p>
-        <p> @(Math.Abs(deal.UnitsFrom - deal.UnitsTo) < 0.1 ? $"{deal.UnitsFrom}" : $"{deal.UnitsFrom} - {deal.UnitsTo}") @deal.UnitType</p>
-        <img src="@deal.SmallImage"/>
+    <div x-data="{open: false}">
+        <h3 x-on:mouseleave="open = false" x-on:mouseenter="open = true">@deal.Name</h3>
+        @* <p>@deal.Price kr</p> *@
+        @* <p> @(Math.Abs(deal.UnitsFrom - deal.UnitsTo) < 0.1 ? $"{deal.UnitsFrom}" : $"{deal.UnitsFrom} - {deal.UnitsTo}") @deal.UnitType</p> *@
+        <img x-show="open" height="200" src="@deal.SmallImage"/>
     </div>
 }

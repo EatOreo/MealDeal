@@ -49,7 +49,7 @@ public class DealService
 
         var deals = _dealContext.Deals
             .Where(d => d.Shop == shop);
-        if (!string.IsNullOrEmpty(search)) deals = deals.Where(d => d.Name.Contains(search));
+        if (!string.IsNullOrEmpty(search)) deals = deals.Where(d => d.Name.ToLower().Contains(search.ToLower()));
         
         if (limit >= 0 ) return await deals.Take(limit).ToListAsync();
         else return await deals.ToListAsync();
