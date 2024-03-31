@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deals", "Deals\Deals.csproj", "{45052EBD-71CD-4E04-9492-B2BD99248CAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealsConsole", "MealsConsole\MealsConsole.csproj", "{FFA579AB-8E8E-412A-9AF5-10692BAB7C09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{45052EBD-71CD-4E04-9492-B2BD99248CAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45052EBD-71CD-4E04-9492-B2BD99248CAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45052EBD-71CD-4E04-9492-B2BD99248CAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFA579AB-8E8E-412A-9AF5-10692BAB7C09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFA579AB-8E8E-412A-9AF5-10692BAB7C09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFA579AB-8E8E-412A-9AF5-10692BAB7C09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFA579AB-8E8E-412A-9AF5-10692BAB7C09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

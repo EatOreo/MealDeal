@@ -1,0 +1,11 @@
+{
+  "Name": "Chili",
+  "Ingredients": {
+    "Ground Beef": "1 lb",
+    "Tomato Sauce": "1 can",
+    "Kidney Beans": "1 can",
+    "Chili Powder": "1 tbsp",
+    "Salt": "1 tsp"
+  },
+  "Instructions": "Brown beef, add tomato sauce, beans, chili powder, and salt. Simmer for 20 minutes."
+}
