@@ -2,11 +2,11 @@ namespace MealsConsole.Models;
 
 public class Ingredient
 {
-    public List<string> Names { get; set; } = new();
-    public List<Ingredient> Substitutes { get; set; } = new();
+    private NameList Names { get; } = new();
     
-    public Ingredient(string name)
+    public Ingredient(string name, params string[] names)
     {
-        Names.Add(name.ToLower());
+        Names.Add(name);
+        Names.AddRange(names);
     }
 }
