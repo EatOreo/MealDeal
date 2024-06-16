@@ -1,3 +1,5 @@
+using MealsConsole.Services;
+
 namespace MealsConsole.Models;
 
 public class GlobalNameSet : HashSet<string>
@@ -19,6 +21,11 @@ public class NameList : List<string>
         }
         base.Add(name);
         allIngredients.Add(name);
+        foreach (var alternativeName in NameService.AlternativeNames(name).Where(alternativeName => !allIngredients.Contains(alternativeName)))
+        {
+            base.Add(alternativeName);
+            allIngredients.Add(alternativeName);
+        }
     }
     
     public new bool Remove(string name)

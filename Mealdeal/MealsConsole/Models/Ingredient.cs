@@ -1,3 +1,5 @@
+using MealsConsole.Services;
+
 namespace MealsConsole.Models;
 
 public class Ingredient
